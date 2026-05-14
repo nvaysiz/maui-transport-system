@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Pz2MauiApp.TripPage"
+             Title="">
+
+    <ScrollView>
+        <VerticalStackLayout Margin="10" Spacing="12">
+
+            <Label Text="Рейсы"
+                   FontSize="34"
+                   FontAttributes="Bold"
+                   TextColor="Black" />
+
+            <HorizontalStackLayout HorizontalOptions="Center"
+                                   Spacing="18"
+                                   Margin="0,10,0,10">
+                <Image Source="nut.png"
+                       WidthRequest="100"
+                       HeightRequest="100" />
+                <Label Text="Список рейсов"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#123C69"
+                       VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <!-- Шапка таблицы -->
+            <Grid ColumnDefinitions="2*,3*,2*,2*"
+                  Padding="12"
+                  BackgroundColor="#B7E3F6"
+                  ColumnSpacing="8">
+                <Label Grid.Column="0"
+                       Text="Дата"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#123C69" />
+                <Label Grid.Column="1"
+                       Text="Маршрут"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#123C69" />
+                <Label Grid.Column="2"
+                       Text="Км"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#123C69" />
+                <Label Grid.Column="3"
+                       Text="Стоимость"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#123C69" />
+            </Grid>
+
+            <!-- Таблица -->
+            <CollectionView x:Name="cvTrips"
+                            ItemsSource="{Binding Trips}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedTrip, Mode=TwoWay}"
+                            HeightRequest="220">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="#8ECFE8"
+                                StrokeThickness="1"
+                                BackgroundColor="#EAF7FD"
+                                Padding="12"
+                                Margin="0,0,0,3">
+                            <Grid ColumnDefinitions="2*,3*,2*,2*"
+                                  ColumnSpacing="8">
+
+                                <Label Grid.Column="0"
+                                       Text="{Binding TripDate, StringFormat='{}{0:dd.MM.yyyy}'}"
+                                       FontSize="16"
+                                       VerticalOptions="Center" />
+
+                                <Label Grid.Column="1"
+                                       Text="{Binding Route}"
+                                       FontSize="16"
+                                       VerticalOptions="Center" />
+
+                                <Label Grid.Column="2"
+                                       Text="{Binding Distance, StringFormat='{}{0} км'}"
+                                       FontSize="16"
+                                       VerticalOptions="Center" />
+
+                                <Label Grid.Column="3"
+                                       Text="{Binding TotalCost, StringFormat='{}{0} руб.'}"
+                                       FontSize="16"
+                                       VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Форма -->
+            <Label Text="Транспортное средство"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   Margin="0,10,0,0" />
+            <Picker ItemsSource="{Binding Vehicles}"
+                    SelectedItem="{Binding SelectedVehicle}"
+                    ItemDisplayBinding="{Binding Number}"
+                    Title="Выберите транспорт" />
+
+            <Label Text="Дата рейса"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+            <DatePicker Date="{Binding TripDate}" />
+
+            <Label Text="Расстояние, км"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+            <Entry Text="{Binding Distance}"
+                   Keyboard="Numeric"
+                   Placeholder="Введите расстояние" />
+
+            <Label Text="Наименование груза"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+            <Entry Text="{Binding CargoName}"
+                   Placeholder="Введите груз" />
+
+            <Label Text="Маршрут"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+            <Entry Text="{Binding Route}"
+                   Placeholder="Введите маршрут" />
+
+            <Label Text="Расход топлива, л"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+            <Entry Text="{Binding FuelAmount}"
+                   IsReadOnly="True" />
+
+            <Label Text="Стоимость рейса, руб."
+                   FontSize="18"
+                   FontAttributes="Bold" />
+            <Entry Text="{Binding TotalCost}"
+                   IsReadOnly="True" />
+
+            <!-- Кнопки -->
+            <HorizontalStackLayout Spacing="20"
+                                   HorizontalOptions="Center"
+                                   Margin="0,10,0,0">
+
+                <ImageButton Source="add_256x256.png"
+                             Command="{Binding AddCommand}"
+                             WidthRequest="40"
+                             HeightRequest="40"
+                             CornerRadius="20"
+                             Pressed="IconButton_Pressed"
+                             Released="IconButton_Released">
+                    <ImageButton.GestureRecognizers>
+                        <PointerGestureRecognizer PointerEntered="IconButton_PointerEntered"
+                                                  PointerExited="IconButton_PointerExited" />
+                    </ImageButton.GestureRecognizers>
+                </ImageButton>
+
+                <ImageButton Source="refresh_256x256.png"
+                             Command="{Binding UpdateCommand}"
+                             WidthRequest="40"
+                             HeightRequest="40"
+                             CornerRadius="20"
+                             Pressed="IconButton_Pressed"
+                             Released="IconButton_Released">
+                    <ImageButton.GestureRecognizers>
+                        <PointerGestureRecognizer PointerEntered="IconButton_PointerEntered"
+                                                  PointerExited="IconButton_PointerExited" />
+                    </ImageButton.GestureRecognizers>
+                </ImageButton>
+
+                <ImageButton Source="remove_256x256.png"
+                             Command="{Binding RemoveCommand}"
+                             WidthRequest="40"
+                             HeightRequest="40"
+                             CornerRadius="20"
+                             Pressed="IconButton_Pressed"
+                             Released="IconButton_Released">
+                    <ImageButton.GestureRecognizers>
+                        <PointerGestureRecognizer PointerEntered="IconButton_PointerEntered"
+                                                  PointerExited="IconButton_PointerExited" />
+                    </ImageButton.GestureRecognizers>
+                </ImageButton>
+
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

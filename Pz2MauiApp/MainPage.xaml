@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Pz2MauiApp.MainPage"
+             Title="Главная">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Label Text="Главное меню"
+                   Style="{StaticResource Headline}" />
+
+            <Image Source="car.png"
+                   HeightRequest="220"
+                   HorizontalOptions="Center" />
+
+            <!-- Транспорт -->
+            <Border x:Name="vehicleCard"
+                    Stroke="#8ECFE8"
+                    BackgroundColor="#B7E3F6"
+                    StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 18"
+                    Padding="18">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="GoToVehicle" />
+                    <PointerGestureRecognizer PointerEntered="Card_PointerEntered"
+                                              PointerExited="Card_PointerExited"
+                                              PointerPressed="Card_PointerPressed"
+                                              PointerReleased="Card_PointerReleased" />
+                </Border.GestureRecognizers>
+
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="18">
+                    <Image Source="track.png"
+                           WidthRequest="42"
+                           HeightRequest="42"
+                           VerticalOptions="Center" />
+                    <Label Grid.Column="1"
+                           Text="Транспорт"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#123C69"
+                           VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Топливо -->
+            <Border x:Name="fuelCard"
+                    Stroke="#8ECFE8"
+                    BackgroundColor="#B7E3F6"
+                    StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 18"
+                    Padding="18">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="GoToFuel" />
+                    <PointerGestureRecognizer PointerEntered="Card_PointerEntered"
+                                              PointerExited="Card_PointerExited"
+                                              PointerPressed="Card_PointerPressed"
+                                              PointerReleased="Card_PointerReleased" />
+                </Border.GestureRecognizers>
+
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="18">
+                    <Image Source="fuel.png"
+                           WidthRequest="42"
+                           HeightRequest="42"
+                           VerticalOptions="Center" />
+                    <Label Grid.Column="1"
+                           Text="Топливо"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#123C69"
+                           VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Рейсы -->
+            <Border x:Name="tripCard"
+                    Stroke="#8ECFE8"
+                    BackgroundColor="#B7E3F6"
+                    StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 18"
+                    Padding="18">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="GoToTrip" />
+                    <PointerGestureRecognizer PointerEntered="Card_PointerEntered"
+                                              PointerExited="Card_PointerExited"
+                                              PointerPressed="Card_PointerPressed"
+                                              PointerReleased="Card_PointerReleased" />
+                </Border.GestureRecognizers>
+
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="18">
+                    <Image Source="nut.png"
+                           WidthRequest="42"
+                           HeightRequest="42"
+                           VerticalOptions="Center" />
+                    <Label Grid.Column="1"
+                           Text="Рейсы"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#123C69"
+                           VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
